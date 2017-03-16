@@ -147,7 +147,7 @@ Signal::~Signal(){
 
 int main(int argc, char *argv[]) {
 	//initialize variables
-	int x=0;
+	int x=1;
 	int y=1;
 	int flag=0;
 	int num=0;
@@ -180,15 +180,15 @@ int main(int argc, char *argv[]) {
 
 //***********************************************************************************
 				//test
-					cout << "\nafter con\n";
-					sig->print();
+					//cout << "\nafter con\n";
+					//sig->print();
 
 				//ITS FINE HERE!!!!!!!!
 			}
 
 			//test
-				cout << "\nbefore y++\n";
-				sig->print();//prints wrong here
+				//cout << "\nbefore y++\n";
+				//sig->print();//prints wrong here
 //***********************************************************************************
 
 			y++; //increments past y+1 because it's already found and used
@@ -226,15 +226,13 @@ int main(int argc, char *argv[]) {
 	while(x < argc){ //looks for other command line arguments
 
 		if((argv[x][0] == '-') && (argv[x][1] == 'n')){
-			flag1 = 1; //-n found
 			x++; //if found, skip because file has already been opened before
 		}
 		else if((argv[x][0] == '-') && (argv[x][1] == 'f')){
-			flag1 = 1; //-f found
 			x++; //if found, skip because file has already been opened
 		}
 		else if((argv[x][0] == '-') && (argv[x][1] == 'o')){
-			flag1 = 1; //-o found
+			flag1=1; //-o found
 			//initializes variables
 			int num1;
 			double off=0;
@@ -293,58 +291,53 @@ int main(int argc, char *argv[]) {
 			sig->normalize(); //calls normalize method
 		}
 
-		if(flag1 != 1){ //if no command-line arguments found for methods
-				do{
-					cout << "Options: \n" << "1) Offset\n" << "2) Scale\n"
-						 << "3) Center\n" << "4) Normalize\n" << "5) Statistics\n"
-						 << endl;
-
-					cout << "Please enter the number of your choice above: ";
-					cin >> choice; //user selects option
-
-					if(choice<1 || choice>5){
-						flag3 = 0; //keep looping
-					}
-					else{
-						flag3 = 1; //breaks loop
-					}
-
-
-				}while(flag3 != 1); //keep asking for valid option
-
-
-			switch(choice){
-				case 1:
-					cout << "\nPlease enter the offset number: ";
-					cin >> off2; //gets offset from user input
-					cout << endl;
-					sig->offset(off2); //calls offset method
-					x = argc; //breaks out of the while loop
-					break;
-				case 2:
-					cout << "\nPlease enter the scale number: ";
-					cin >> sca2; //gets scale from user
-					cout << endl;
-					sig->scale(sca2); //calls scale method
-					x = argc; //breaks out of the while loop
-					break;
-				case 3:
-					sig->center(); //calling center method
-					x = argc; //breaks out of the while loop
-					break;
-				case 4:
-					sig->normalize(); //calls normalize method
-					x = argc; //breaks out of the while loop
-					break;
-				case 5:
-					sig->statistics(); //calls statistics method
-					x = argc; //breaks out of the while loop
-					break;
-			}//end of switch
-		}//end of flag != 1
-
 		x++; //increments to next command-line argument
 	}
+
+	if(flag1 != 1){ //if no command-line arguments found for methods
+			do{
+				cout << "Options: \n" << "1) Offset\n" << "2) Scale\n"
+					 << "3) Center\n" << "4) Normalize\n" << "5) Statistics\n"
+					 << endl;
+
+				cout << "Please enter the number of your choice above: ";
+				cin >> choice; //user selects option
+
+				if(choice<1 || choice>5){
+					flag3 = 0; //keep looping
+				}
+				else{
+					flag3 = 1; //breaks loop
+				}
+
+
+			}while(flag3 != 1); //keep asking for valid option
+
+
+		switch(choice){
+			case 1:
+				cout << "\nPlease enter the offset number: ";
+				cin >> off2; //gets offset from user input
+				cout << endl;
+				sig->offset(off2); //calls offset method
+				break;
+			case 2:
+				cout << "\nPlease enter the scale number: ";
+				cin >> sca2; //gets scale from user
+				cout << endl;
+				sig->scale(sca2); //calls scale method
+				break;
+			case 3:
+				sig->center(); //calling center method
+				break;
+			case 4:
+				sig->normalize(); //calls normalize method
+				break;
+			case 5:
+				sig->statistics(); //calls statistics method
+				break;
+		}//end of switch
+	}//end of flag != 1
 
 	char filenam[] = "NewFile.txt"; //file name to create in Save_file
 
@@ -473,7 +466,7 @@ void Signal::center(){
 	offset(average); //assigns to array in offset function
 
 	maximum_value = (double) act_max(); //finds the max of the signal_data
-	average_calc(); //calls average so it can be printed in Sig_info
+	average_calc(); //finds average to print in Sig_info
 
 	return;
 }
