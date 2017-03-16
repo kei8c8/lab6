@@ -35,17 +35,7 @@ class Signal{ //defining object
 		void statistics();
 		void normalize();
 		void center();
-		void print(); //test!!!!!!!!!
-
 };
-
-void Signal::print(){ //test method!!!!!!!!!
-	int i=0;
-
-	for(i=0;i<length;i++){
-		cout << signal_data[i] << endl;
-	}
-}
 
 Signal::Signal(){
 	//initializes values to zero
@@ -178,18 +168,7 @@ int main(int argc, char *argv[]) {
 				sig = &sig1; //assigns address to Signal pointer
 				flag = 1; //file is found and opened
 
-//***********************************************************************************
-				//test
-					//cout << "\nafter con\n";
-					//sig->print();
-
-				//ITS FINE HERE!!!!!!!!
 			}
-
-			//test
-				//cout << "\nbefore y++\n";
-				//sig->print();//prints wrong here
-//***********************************************************************************
 
 			y++; //increments past y+1 because it's already found and used
 		}
